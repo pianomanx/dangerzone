@@ -13,13 +13,6 @@ class SettingsWidget(QtWidgets.QWidget):
         self.global_common = global_common
         self.common = common
 
-        # Dangerous document label
-        self.dangerous_doc_label = QtWidgets.QLabel()
-        self.dangerous_doc_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.dangerous_doc_label.setStyleSheet(
-            self.global_common.css["SettingsWidget DangerousDocLabel"]
-        )
-
         # Save safe version
         self.save_checkbox = QtWidgets.QCheckBox("Save safe PDF")
         self.save_checkbox.clicked.connect(self.update_ui)
@@ -89,7 +82,6 @@ class SettingsWidget(QtWidgets.QWidget):
 
         # Layout
         layout = QtWidgets.QVBoxLayout()
-        layout.addWidget(self.dangerous_doc_label)
         layout.addSpacing(20)
         layout.addLayout(save_layout)
         if platform.system() != "Windows":
@@ -173,11 +165,6 @@ class SettingsWidget(QtWidgets.QWidget):
                 self.start_button.setEnabled(False)
 
     def document_selected(self):
-        # Update the danger doc label
-        self.dangerous_doc_label.setText(
-            f"Dangerous: {os.path.basename(self.common.document_filename)}"
-        )
-
         # Update the save location
         save_filename = f"{os.path.splitext(self.common.document_filename)[0]}-safe.pdf"
         self.common.save_filename = save_filename

@@ -22,7 +22,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setWindowIcon(self.global_common.get_window_icon())
 
         self.setMinimumWidth(600)
-        self.setMinimumHeight(400)
+        self.setMinimumHeight(500)
 
         # Documents widget
         self.docs_widget = DocsWidget(self.global_common, self.common)
@@ -61,7 +61,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.show()
 
     def update(self):
-        selected_filenames = self.docs_widget.get_filenames()
+        filenames = self.docs_widget.get_filenames()
         if len(filenames) == 0:
             self.settings_widget.hide()
         else:
