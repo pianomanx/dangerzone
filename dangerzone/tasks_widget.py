@@ -20,16 +20,16 @@ class TasksWidget(QtWidgets.QWidget):
         self.dangerous_doc_label = QtWidgets.QLabel()
         self.dangerous_doc_label.setAlignment(QtCore.Qt.AlignCenter)
         self.dangerous_doc_label.setStyleSheet(
-            "QLabel { font-size: 16px; font-weight: bold; color: #572606; }"
+            self.global_common.css["TasksWidget DangerousDocLabel"]
         )
 
         self.task_label = QtWidgets.QLabel()
         self.task_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.task_label.setStyleSheet("QLabel { font-weight: bold; font-size: 20px; }")
+        self.task_label.setStyleSheet(self.global_common.css["TasksWidget TaskLabel"])
 
         self.task_details = QtWidgets.QLabel()
         self.task_details.setStyleSheet(
-            "QLabel { background-color: #ffffff; font-size: 12px; padding: 10px; }"
+            self.global_common.css["TasksWidget TaskDetails"]
         )
         self.task_details.setFont(self.global_common.fixed_font)
         self.task_details.setAlignment(QtCore.Qt.AlignTop)

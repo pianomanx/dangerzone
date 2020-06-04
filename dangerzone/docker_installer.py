@@ -68,7 +68,7 @@ class DockerInstaller(QtWidgets.QDialog):
             label.setText("Dangerzone for macOS requires Docker")
         elif platform.system() == "Windows":
             label.setText("Dangerzone for Windows requires Docker")
-        label.setStyleSheet("QLabel { font-weight: bold; }")
+        label.setStyleSheet(self.global_common.css["DockerInstaller Label"])
         label.setAlignment(QtCore.Qt.AlignCenter)
 
         self.task_label = QtWidgets.QLabel()
@@ -83,7 +83,7 @@ class DockerInstaller(QtWidgets.QDialog):
             self.open_finder_button.setText("Show in Finder")
         else:
             self.open_finder_button.setText("Show in Explorer")
-        self.open_finder_button.setStyleSheet("QPushButton { font-weight: bold; }")
+        self.open_finder_button.setStyleSheet(self.global_common.css["DockerInstaller OpenFinderButton"])
         self.open_finder_button.clicked.connect(self.open_finder_clicked)
         self.open_finder_button.hide()
 

@@ -17,7 +17,7 @@ class SettingsWidget(QtWidgets.QWidget):
         self.dangerous_doc_label = QtWidgets.QLabel()
         self.dangerous_doc_label.setAlignment(QtCore.Qt.AlignCenter)
         self.dangerous_doc_label.setStyleSheet(
-            "QLabel { font-size: 16px; font-weight: bold; color: #572606; }"
+            self.global_common.css["SettingsWidget DangerousDocLabel"]
         )
 
         # Save safe version
@@ -80,7 +80,7 @@ class SettingsWidget(QtWidgets.QWidget):
         self.start_button = QtWidgets.QPushButton("Convert to Safe Document")
         self.start_button.clicked.connect(self.start_button_clicked)
         self.start_button.setStyleSheet(
-            "QPushButton { font-size: 16px; font-weight: bold; }"
+            self.global_common.css["SettingsWidget DangerousDocLabel"]
         )
         button_layout = QtWidgets.QHBoxLayout()
         button_layout.addStretch()

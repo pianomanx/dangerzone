@@ -234,6 +234,71 @@ class GlobalCommon(object):
         # Load settings
         self.settings = Settings(self)
 
+        # Qt5 stylesheets
+        self.css = {
+            "DockerInstaller Label": """
+                QLabel {
+                    font-weight: bold;
+                }""",
+            "DockerInstaller OpenFinderButton": """
+                QPushButton {
+                    font-weight: bold;
+                }""",
+            "DocsWidget DropHereLabel": """
+                QLabel {
+                    color: #999999;
+                }""",
+            "DocsWidget DropCountLabel": """
+                QLabel {
+                    color: #ffffff;
+                    background-color: #f44449;
+                    font-weight: bold;
+                    padding: 5px 10px;
+                    border-radius: 10px;
+                }""",
+            "DocsWidget FileList DragEnter": """
+                FileList {
+                    border: 3px solid #538ad0;
+                }""",
+            "DocsWidget FileList DragLeave": """
+                FileList {
+                    border: none;
+                }""",
+            "DocsWidget FileList FileSize": """
+                QLabel {
+                    color: #666666;
+                    font-size: 11px;
+                }""",
+            "SettingsWidget DangerousDocLabel": """
+                QLabel {
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: #572606;
+                }""",
+            "SettingsWidget StartButton": """
+                QPushButton {
+                    font-size: 16px;
+                    font-weight: bold;
+                }""",
+            "TasksWidget DangerousDocLabel": """
+                QLabel {
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: #572606;
+                }""",
+            "TasksWidget TaskLabel": """
+                QLabel {
+                    font-weight: bold;
+                    font-size: 20px;
+                }""",
+            "TasksWidget TaskDetails": """
+                QLabel {
+                    background-color: #ffffff;
+                    font-size: 12px;
+                    padding: 10px;
+                }""",
+        }
+
     def get_container_name(self):
         if self.custom_container:
             return self.custom_container
@@ -279,9 +344,13 @@ class GlobalCommon(object):
             )
         else:
             if platform.system() == "Darwin":
-                return os.path.join(os.path.dirname(sys.executable), "dangerzone-container")
+                return os.path.join(
+                    os.path.dirname(sys.executable), "dangerzone-container"
+                )
             elif platform.system() == "Windows":
-                return os.path.join(os.path.dirname(sys.executable), "dangerzone-container.exe")
+                return os.path.join(
+                    os.path.dirname(sys.executable), "dangerzone-container.exe"
+                )
             else:
                 return "/usr/bin/dangerzone-container"
 
@@ -369,7 +438,10 @@ class GlobalCommon(object):
                     plist_data = f.read()
                 plist_dict = plistlib.loads(plist_data)
 
-                if plist_dict.get("CFBundleName") and plist_dict["CFBundleName"] != "Dangerzone":
+                if (
+                    plist_dict.get("CFBundleName")
+                    and plist_dict["CFBundleName"] != "Dangerzone"
+                ):
                     pdf_viewers[plist_dict["CFBundleName"]] = bundle_identifier
 
         elif platform.system() == "Linux":
@@ -489,6 +561,22 @@ class GlobalCommon(object):
             return startupinfo
         else:
             return None
+
+    @staticmethod
+    def human_readable_filesize(b):
+        """
+        Returns filesize in a human readable format
+        """
+        thresh = 1024.0
+        if b < thresh:
+            return "{:.1f} B".format(b)
+        units = ("KiB", "MiB", "GiB")
+        u = 0
+        b /= thresh
+        while b >= thresh:
+            b /= thresh
+            u += 1
+        return "{:.1f} {}".format(b, units[u])
 
 
 class Alert(QtWidgets.QDialog):
